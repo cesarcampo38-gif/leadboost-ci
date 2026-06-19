@@ -6,15 +6,19 @@ const leadForm = document.querySelector("#lead-form");
 const formSuccess = document.querySelector("#form-success");
 const revealItems = document.querySelectorAll(".reveal");
 
-navToggle.addEventListener("click", () => {
-    const isOpen = navMenu.classList.toggle("is-open");
-    navToggle.setAttribute("aria-expanded", String(isOpen));
-});
+if (navToggle && navMenu) {
+    navToggle.addEventListener("click", () => {
+        const isOpen = navMenu.classList.toggle("is-open");
+        navToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+}
 
 navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-        navMenu.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
+        if (navMenu && navToggle) {
+            navMenu.classList.remove("is-open");
+            navToggle.setAttribute("aria-expanded", "false");
+        }
     });
 });
 
@@ -26,11 +30,13 @@ faqButtons.forEach((button) => {
     });
 });
 
-leadForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    formSuccess.textContent = "Gracias, hemos recibido tu solicitud. Te contactaremos pronto.";
-    leadForm.reset();
-});
+if (leadForm && formSuccess) {
+    leadForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        formSuccess.textContent = "Gracias, hemos recibido tu solicitud. Te contactaremos pronto.";
+        leadForm.reset();
+    });
+}
 
 // Reveals each block once, keeping the animation light and inexpensive.
 const revealObserver = new IntersectionObserver(
